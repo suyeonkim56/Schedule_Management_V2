@@ -3,8 +3,8 @@ package com.example.schedule_management_v2.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "board")
-public class Board extends BaseEntity {
+@Table(name = "schedule")
+public class Schedule extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
