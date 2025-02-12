@@ -2,6 +2,7 @@ package com.example.schedule_management_v2.controller;
 
 import com.example.schedule_management_v2.dto.CreateScheduleRequestDto;
 import com.example.schedule_management_v2.dto.ScheduleResponseDto;
+import com.example.schedule_management_v2.dto.ScheduleWithEmailResponseDto;
 import com.example.schedule_management_v2.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,4 +37,21 @@ public class ScheduleController {
 
         return new ResponseEntity<>(scheduleResponseDtoList, HttpStatus.OK);
     }
+
+    //특정 일정 조회
+    @GetMapping("/{id}")
+    public ResponseEntity<ScheduleWithEmailResponseDto> findById(@PathVariable Long id){
+        ScheduleWithEmailResponseDto scheduleWithEmailResponseDto = scheduleService.findById(id);
+
+        return new ResponseEntity<>(scheduleWithEmailResponseDto, HttpStatus.OK);
+    }
+
+    //일정 삭제
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSchedule(@PathVariable Long id){
+        scheduleService.deleteSchedule(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.example.schedule_management_v2.service;
 
 import com.example.schedule_management_v2.dto.ScheduleResponseDto;
+import com.example.schedule_management_v2.dto.ScheduleWithEmailResponseDto;
 import com.example.schedule_management_v2.entity.Member;
 import com.example.schedule_management_v2.entity.Schedule;
 import com.example.schedule_management_v2.repository.MemberRepository;
@@ -40,5 +41,17 @@ public class ScheduleService {
                 .stream()
                 .map(ScheduleResponseDto::toDto)
                 .toList();
+    }
+
+    public ScheduleWithEmailResponseDto findById(Long id) {
+        Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
+        Member writer = findSchedule.getMember();
+        return new ScheduleWithEmailResponseDto(findSchedule.getTitle(), findSchedule.getContents(), writer.getEmail());
+    }
+
+    public void deleteSchedule(Long id) {
+        Schedule findSchedule =  scheduleRepository.findByIdOrElseThrow(id);
+
+        scheduleRepository.delete(findSchedule);
     }
 }
