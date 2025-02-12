@@ -19,6 +19,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    //유저 회원가입
     public SignupResponseDto signUp(String username, String password, String email) {
         Member member = new Member(username, password, email);
 
@@ -27,6 +28,7 @@ public class MemberService {
         return new SignupResponseDto(savedMember.getId(), savedMember.getUsername(), savedMember.getEmail());
     }
 
+    //유저 단건 조회
     public MemberResponseDto findById(Long id) {
         Optional<Member> optionalMember = memberRepository.findById(id);
 

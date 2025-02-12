@@ -16,6 +16,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    //유저 회원가입
     @PostMapping("/signup")
     public ResponseEntity<SignupResponseDto> signUp(@RequestBody SignupRequestDto requestDto){
 
@@ -26,6 +27,7 @@ public class MemberController {
         return new ResponseEntity<>(signupResponseDto, HttpStatus.CREATED);
     }
 
+    //유저 단건 조회
     @GetMapping("/{id}")
     public ResponseEntity<MemberResponseDto> findById(@PathVariable Long id){
         MemberResponseDto memberResponseDto = memberService.findById(id);
