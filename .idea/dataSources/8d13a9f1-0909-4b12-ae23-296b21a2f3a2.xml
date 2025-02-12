@@ -1044,11 +1044,11 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <table id="298" parent="293" name="board">
+    <table id="298" parent="293" name="member">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="299" parent="293" name="member">
+    <table id="299" parent="293" name="schedule">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
@@ -1062,89 +1062,89 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>2</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="302" parent="298" name="member_id">
+    <column id="302" parent="298" name="modified_at">
       <Position>3</Position>
-      <StoredType>bigint|0s</StoredType>
-    </column>
-    <column id="303" parent="298" name="modified_at">
-      <Position>4</Position>
       <StoredType>datetime(6)|0s</StoredType>
     </column>
-    <column id="304" parent="298" name="contents">
+    <column id="303" parent="298" name="password">
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StoredType>varchar(255)|0s</StoredType>
+    </column>
+    <column id="304" parent="298" name="useremail">
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StoredType>longtext|0s</StoredType>
+      <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <column id="305" parent="298" name="title">
+    <column id="305" parent="298" name="username">
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <foreign-key id="306" parent="298" name="FKsds8ox89wwf6aihinar49rmfy">
-      <ColNames>member_id</ColNames>
-      <RefColNames>id</RefColNames>
-      <RefTableName>member</RefTableName>
-    </foreign-key>
-    <index id="307" parent="298" name="PRIMARY">
+    <index id="306" parent="298" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="308" parent="298" name="FKsds8ox89wwf6aihinar49rmfy">
-      <ColNames>member_id</ColNames>
+    <index id="307" parent="298" name="UKgc3jmn7c2abyo3wf6syln5t2i">
+      <ColNames>username</ColNames>
       <Type>btree</Type>
+      <Unique>1</Unique>
     </index>
-    <key id="309" parent="298" name="PRIMARY">
+    <key id="308" parent="298" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <key id="309" parent="298" name="UKgc3jmn7c2abyo3wf6syln5t2i">
+      <UnderlyingIndexName>UKgc3jmn7c2abyo3wf6syln5t2i</UnderlyingIndexName>
     </key>
     <column id="310" parent="299" name="created_at">
       <Position>1</Position>
       <StoredType>datetime(6)|0s</StoredType>
     </column>
     <column id="311" parent="299" name="id">
-      <AutoIncrement>1</AutoIncrement>
+      <AutoIncrement>2</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="312" parent="299" name="modified_at">
+    <column id="312" parent="299" name="member_id">
       <Position>3</Position>
+      <StoredType>bigint|0s</StoredType>
+    </column>
+    <column id="313" parent="299" name="modified_at">
+      <Position>4</Position>
       <StoredType>datetime(6)|0s</StoredType>
     </column>
-    <column id="313" parent="299" name="password">
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-      <StoredType>varchar(255)|0s</StoredType>
-    </column>
-    <column id="314" parent="299" name="useremail">
+    <column id="314" parent="299" name="contents">
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StoredType>varchar(255)|0s</StoredType>
+      <StoredType>longtext|0s</StoredType>
     </column>
-    <column id="315" parent="299" name="username">
+    <column id="315" parent="299" name="title">
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <index id="316" parent="299" name="PRIMARY">
+    <foreign-key id="316" parent="299" name="FKn7js9p799qcts7le20pec9bxr">
+      <ColNames>member_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>member</RefTableName>
+    </foreign-key>
+    <index id="317" parent="299" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="317" parent="299" name="UKgc3jmn7c2abyo3wf6syln5t2i">
-      <ColNames>username</ColNames>
+    <index id="318" parent="299" name="FKn7js9p799qcts7le20pec9bxr">
+      <ColNames>member_id</ColNames>
       <Type>btree</Type>
-      <Unique>1</Unique>
     </index>
-    <key id="318" parent="299" name="PRIMARY">
+    <key id="319" parent="299" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <key id="319" parent="299" name="UKgc3jmn7c2abyo3wf6syln5t2i">
-      <UnderlyingIndexName>UKgc3jmn7c2abyo3wf6syln5t2i</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>
