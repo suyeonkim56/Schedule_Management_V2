@@ -1,5 +1,6 @@
 package com.example.schedule_management_v2.service;
 
+import com.example.schedule_management_v2.dto.LoginResponseDto;
 import com.example.schedule_management_v2.dto.MemberResponseDto;
 import com.example.schedule_management_v2.dto.SignupResponseDto;
 import com.example.schedule_management_v2.entity.Member;
@@ -60,4 +61,16 @@ public class MemberService {
         memberRepository.delete(findMember);
     }
 
+
+    //로그인
+    public LoginResponseDto login(String email, String password) {
+
+        Member member = memberRepository.findMemberByEmailOrElseThrow(email);
+
+        if(!member.getEmail().equals(email) || !member.getPassword().equals(password))
+        {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"이메일 또는 비밀번호가 일치하지 않습니다.");
+        }
+        return new LoginResponseDto(member.getId());
+    }
 }
