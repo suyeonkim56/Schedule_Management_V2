@@ -7,7 +7,10 @@ import com.example.schedule_management_v2.entity.Schedule;
 import com.example.schedule_management_v2.repository.MemberRepository;
 import com.example.schedule_management_v2.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -40,6 +43,7 @@ public class ScheduleService {
                 .toList();
     }
 
+    //일정 단건 조회
     public ScheduleWithEmailResponseDto findById(Long id) {
         Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
         Member writer = findSchedule.getMember();
@@ -51,5 +55,19 @@ public class ScheduleService {
         Schedule findSchedule =  scheduleRepository.findByIdOrElseThrow(id);
 
         scheduleRepository.delete(findSchedule);
+    }
+
+    //일정 제목 수정
+    @Transactional
+    public void updateTitle(Long id, String password, String newTitle) {
+        Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
+        Member writer = findSchedule.getMember();
+
+        if(!writer.getPassword().equals(password))
+        {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"비밀번호가 일치하지 않습니다.");
+        }
+
+        findSchedule.setTitle(newTitle);
     }
 }

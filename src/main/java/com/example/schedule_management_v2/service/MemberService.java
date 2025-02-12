@@ -53,7 +53,7 @@ public class MemberService {
         findmember.updatePassword(newPassword);
     }
 
-    //유저 삭
+    //유저 삭제
     public void deleteMember(Long id) {
         Member findMember =  memberRepository.findByIdOrElseThrow(id);
 

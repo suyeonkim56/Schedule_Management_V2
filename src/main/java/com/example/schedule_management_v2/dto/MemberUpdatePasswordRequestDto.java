@@ -3,13 +3,13 @@ package com.example.schedule_management_v2.dto;
 import lombok.Getter;
 
 @Getter
-public class UpdatePasswordRequestDto {
+public class MemberUpdatePasswordRequestDto {
 
     private final String oldPassword;
 
     private final String newPassword;
 
-    public UpdatePasswordRequestDto(String oldPassword, String newPassword) {
+    public MemberUpdatePasswordRequestDto(String oldPassword, String newPassword) {
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
     }

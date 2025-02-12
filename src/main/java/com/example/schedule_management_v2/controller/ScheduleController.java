@@ -2,6 +2,7 @@ package com.example.schedule_management_v2.controller;
 
 import com.example.schedule_management_v2.dto.CreateScheduleRequestDto;
 import com.example.schedule_management_v2.dto.ScheduleResponseDto;
+import com.example.schedule_management_v2.dto.ScheduleUpdateTitleRequestDto;
 import com.example.schedule_management_v2.dto.ScheduleWithEmailResponseDto;
 import com.example.schedule_management_v2.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,16 @@ public class ScheduleController {
         return new ResponseEntity<>(scheduleResponseDto, HttpStatus.CREATED);
     }
 
+    //일정 제목 수정
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> updateTitle(
+            @PathVariable Long id,
+            @RequestBody ScheduleUpdateTitleRequestDto requestDto
+            ){
+        scheduleService.updateTitle(id,requestDto.getPassword(), requestDto.getNewTitle());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     //일정 전체 조회
     @GetMapping
     public ResponseEntity<List<ScheduleResponseDto>> findAll(){
@@ -38,7 +49,7 @@ public class ScheduleController {
         return new ResponseEntity<>(scheduleResponseDtoList, HttpStatus.OK);
     }
 
-    //특정 일정 조회
+    //일정 단건 조회
     @GetMapping("/{id}")
     public ResponseEntity<ScheduleWithEmailResponseDto> findById(@PathVariable Long id){
         ScheduleWithEmailResponseDto scheduleWithEmailResponseDto = scheduleService.findById(id);
