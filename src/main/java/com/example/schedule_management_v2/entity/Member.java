@@ -31,5 +31,7 @@ public class Member extends BaseEntity{
         this.email = email;
     }
 
-
+    public void updatePassword(String password) {
+        this.password = password;
+    }
 }

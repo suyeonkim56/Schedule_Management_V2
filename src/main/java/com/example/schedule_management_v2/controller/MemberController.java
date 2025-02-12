@@ -3,6 +3,7 @@ package com.example.schedule_management_v2.controller;
 import com.example.schedule_management_v2.dto.MemberResponseDto;
 import com.example.schedule_management_v2.dto.SignupRequestDto;
 import com.example.schedule_management_v2.dto.SignupResponseDto;
+import com.example.schedule_management_v2.dto.UpdatePasswordRequestDto;
 import com.example.schedule_management_v2.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,4 +35,15 @@ public class MemberController {
 
         return new ResponseEntity<>(memberResponseDto, HttpStatus.OK);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> updatePassword(
+            @PathVariable Long id,
+            @RequestBody UpdatePasswordRequestDto requestDto
+    ) {
+        memberService.updatePassword(id, requestDto.getOldPassword(), requestDto.getNewPassword());
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
