@@ -1,7 +1,6 @@
 package com.example.schedule_management_v2.service;
 
 import com.example.schedule_management_v2.dto.MemberResponseDto;
-import com.example.schedule_management_v2.dto.SignupRequestDto;
 import com.example.schedule_management_v2.dto.SignupResponseDto;
 import com.example.schedule_management_v2.entity.Member;
 import com.example.schedule_management_v2.repository.MemberRepository;
@@ -9,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
@@ -42,6 +40,7 @@ public class MemberService {
         return new MemberResponseDto(findMember.getUsername(), findMember.getEmail());
     }
 
+    //유저 비밀번호 변경
     @Transactional
     public void updatePassword(Long id, String oldPassword, String newPassword) {
 
@@ -53,4 +52,12 @@ public class MemberService {
 
         findmember.updatePassword(newPassword);
     }
+
+    //유저 삭
+    public void deleteMember(Long id) {
+        Member findMember =  memberRepository.findByIdOrElseThrow(id);
+
+        memberRepository.delete(findMember);
+    }
+
 }

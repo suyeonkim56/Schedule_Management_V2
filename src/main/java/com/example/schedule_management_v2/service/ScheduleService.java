@@ -7,10 +7,7 @@ import com.example.schedule_management_v2.entity.Schedule;
 import com.example.schedule_management_v2.repository.MemberRepository;
 import com.example.schedule_management_v2.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
@@ -49,6 +46,7 @@ public class ScheduleService {
         return new ScheduleWithEmailResponseDto(findSchedule.getTitle(), findSchedule.getContents(), writer.getEmail());
     }
 
+    //일정 삭제
     public void deleteSchedule(Long id) {
         Schedule findSchedule =  scheduleRepository.findByIdOrElseThrow(id);
 
