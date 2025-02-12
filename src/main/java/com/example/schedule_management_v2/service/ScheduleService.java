@@ -6,13 +6,20 @@ import com.example.schedule_management_v2.entity.Schedule;
 import com.example.schedule_management_v2.repository.MemberRepository;
 import com.example.schedule_management_v2.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ScheduleService {
     private final MemberRepository memberRepository;
+
     private final ScheduleRepository scheduleRepository;
+
 
     //일정 생성
     public ScheduleResponseDto save(String title, String contents, String username) {
@@ -24,5 +31,14 @@ public class ScheduleService {
         Schedule savedSchedule = scheduleRepository.save(schedule);
 
         return new ScheduleResponseDto(savedSchedule.getId(), savedSchedule.getTitle(),savedSchedule.getContents());
+    }
+
+    //일정 전체 조회
+    public List<ScheduleResponseDto> findAll() {
+
+        return scheduleRepository.findAll()
+                .stream()
+                .map(ScheduleResponseDto::toDto)
+                .toList();
     }
 }
