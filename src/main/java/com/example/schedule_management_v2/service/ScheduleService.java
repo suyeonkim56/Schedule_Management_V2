@@ -34,6 +34,20 @@ public class ScheduleService {
         return new ScheduleResponseDto(savedSchedule.getId(), savedSchedule.getTitle(),savedSchedule.getContents());
     }
 
+    //일정 제목 수정
+    @Transactional
+    public void updateTitle(Long id, String password, String newTitle) {
+        Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
+        Member writer = findSchedule.getMember();
+
+        if(!writer.getPassword().equals(password))
+        {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"비밀번호가 일치하지 않습니다.");
+        }
+
+        findSchedule.setTitle(newTitle);
+    }
+
     //일정 전체 조회
     public List<ScheduleResponseDto> findAll() {
 
@@ -50,24 +64,12 @@ public class ScheduleService {
         return new ScheduleWithEmailResponseDto(findSchedule.getTitle(), findSchedule.getContents(), writer.getEmail());
     }
 
-    //일정 삭제
+    //특정 일정 삭제
     public void deleteSchedule(Long id) {
         Schedule findSchedule =  scheduleRepository.findByIdOrElseThrow(id);
 
         scheduleRepository.delete(findSchedule);
     }
 
-    //일정 제목 수정
-    @Transactional
-    public void updateTitle(Long id, String password, String newTitle) {
-        Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
-        Member writer = findSchedule.getMember();
 
-        if(!writer.getPassword().equals(password))
-        {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"비밀번호가 일치하지 않습니다.");
-        }
-
-        findSchedule.setTitle(newTitle);
-    }
 }

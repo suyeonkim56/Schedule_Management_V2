@@ -28,19 +28,6 @@ public class MemberService {
         return new SignupResponseDto(savedMember.getId(), savedMember.getUsername(), savedMember.getEmail());
     }
 
-    //유저 단건 조회
-    public MemberResponseDto findById(Long id) {
-        Optional<Member> optionalMember = memberRepository.findById(id);
-
-        if(optionalMember.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Does not exist id : " + id);
-        }
-
-        Member findMember = optionalMember.get();
-
-        return new MemberResponseDto(findMember.getUsername(), findMember.getEmail());
-    }
-
     //유저 비밀번호 변경
     @Transactional
     public void updatePassword(Long id, String oldPassword, String newPassword) {
@@ -54,13 +41,25 @@ public class MemberService {
         findmember.updatePassword(newPassword);
     }
 
-    //유저 삭제
+    //특정 유저 조회
+    public MemberResponseDto findById(Long id) {
+        Optional<Member> optionalMember = memberRepository.findById(id);
+
+        if(optionalMember.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Does not exist id : " + id);
+        }
+
+        Member findMember = optionalMember.get();
+
+        return new MemberResponseDto(findMember.getUsername(), findMember.getEmail());
+    }
+
+    //특정 유저 삭제
     public void deleteMember(Long id) {
         Member findMember =  memberRepository.findByIdOrElseThrow(id);
 
         memberRepository.delete(findMember);
     }
-
 
     //로그인
     public LoginResponseDto login(String email, String password) {
